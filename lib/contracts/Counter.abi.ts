@@ -46,3 +46,5 @@ export const CounterAbi = [
     type: "function",
   },
 ] as const;
+
+export const CounterAddress = process.env.NEXT_PUBLIC_COUNTER_ADDRESS ?? "";

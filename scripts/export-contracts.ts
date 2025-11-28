@@ -43,11 +43,12 @@ async function main() {
       exportDir,
       `${contractInfo.name}.abi.ts`,
     );
-    const abiContent = `export const ${contractInfo.name}Abi = ${JSON.stringify(artifact.abi, null, 2)} as const;`;
-    fs.writeFileSync(abiExportPath, abiContent);
-    console.log(`Exported ABI for ${contractInfo.name} to ${abiExportPath}`);
+    const abiContent = `export const ${contractInfo.name}Abi = ${JSON.stringify(artifact.abi, null, 2)} as const;\n\nexport const ${contractInfo.name}Address = process.env.NEXT_PUBLIC_${contractInfo.name.toUpperCase()}_ADDRESS ?? "";\n`;
 
     envContent += `NEXT_PUBLIC_${contractInfo.name.toUpperCase()}_ADDRESS=${contractInfo.address}\n`;
+
+    fs.writeFileSync(abiExportPath, abiContent);
+    console.log(`Exported ABI for ${contractInfo.name} to ${abiExportPath}`);
   }
 
   const envFilePath = path.resolve(__dirname, "../.env.local");
