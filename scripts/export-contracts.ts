@@ -41,9 +41,10 @@ async function main() {
 
     const abiExportPath = path.resolve(
       exportDir,
-      `${contractInfo.name}.abi.json`,
+      `${contractInfo.name}.abi.ts`,
     );
-    fs.writeFileSync(abiExportPath, JSON.stringify(artifact.abi, null, 2));
+    const abiContent = `export const ${contractInfo.name}Abi = ${JSON.stringify(artifact.abi, null, 2)} as const;`;
+    fs.writeFileSync(abiExportPath, abiContent);
     console.log(`Exported ABI for ${contractInfo.name} to ${abiExportPath}`);
 
     envContent += `NEXT_PUBLIC_${contractInfo.name.toUpperCase()}_ADDRESS=${contractInfo.address}\n`;
@@ -55,9 +56,22 @@ async function main() {
     existingEnvContent = fs.readFileSync(envFilePath, "utf-8");
   }
 
+  // Remove existing contract addresses from the env file
+  const existingLines = existingEnvContent
+    .split("\n")
+    .filter(
+      (line) =>
+        !contractsToExport.some((contractInfo) =>
+          line.startsWith(
+            `NEXT_PUBLIC_${contractInfo.name.toUpperCase()}_ADDRESS=`,
+          ),
+        ),
+    );
+  existingEnvContent = existingLines.join("\n");
+
   envContent = existingEnvContent + "\n" + envContent;
 
-  fs.writeFileSync(envFilePath, envContent);
+  fs.writeFileSync(envFilePath, envContent.trim());
   console.log(`Updated environment file at ${envFilePath}`);
 }
 
