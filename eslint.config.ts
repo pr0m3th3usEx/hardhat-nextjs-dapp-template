@@ -39,6 +39,11 @@ export default defineConfig([
           varsIgnorePattern: "^_",
         },
       ],
+    },
+  },
+  {
+    ignores: ["scripts/**", "ignition/**", "hardhat.config.ts"],
+    rules: {
       "no-restricted-syntax": [
         "error",
         {
