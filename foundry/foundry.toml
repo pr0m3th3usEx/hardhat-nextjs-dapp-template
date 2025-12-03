@@ -9,8 +9,8 @@ forge-std = "1.12.0"
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
 [rpc_endpoints]
 base = "${BASE_RPC_URL}"
-baseSepolia = "${BASE_SEPOLIA_RPC_URL}"
- 
+base-sepolia = "${BASE_SEPOLIA_RPC_URL}"
+
 [etherscan]
-baseSepolia = { key = "${ETHERSCAN_API_KEY}", url = "https://api-sepolia.basescan.org/api" }
+base-sepolia = { key = "${ETHERSCAN_API_KEY}", url = "https://api-sepolia.basescan.org/api" }
 base = { key = "${ETHERSCAN_API_KEY}", url = "https://api.basescan.org/api" }
