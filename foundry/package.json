@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "export-contracts": "tsx scripts/export-contracts.ts && eslint ./lib/contracts/**/*.ts --fix"
+    "export-contracts": "tsx ./utils/export-contracts.ts && eslint ./utils/contracts/**/*.ts --fix"
   },
   "dependencies": {
     "next": "16.0.6",

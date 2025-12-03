@@ -42,7 +42,7 @@ export default defineConfig([
     },
   },
   {
-    ignores: ["scripts/**", "ignition/**", "hardhat.config.ts"],
+    ignores: ["utils/export-contracts.ts", "script/**"],
     rules: {
       "no-restricted-syntax": [
         "error",
